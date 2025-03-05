@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const anesthesia = document.getElementById('anesthesia').value;
   
       // Generate advice text based on inputs
-      let adviceText = `<p>Dear Patient, based on your selection of <strong>${condition}</strong> condition, age <strong>${age}</strong>, gender <strong>${gender}</strong>, and your preferred <strong>${anesthesia}</strong> anesthesia, we have tailored the following surgical simulation for you:</p>`;
+      let adviceText = `<p>Based on your selection of <strong>${condition}</strong> condition, age <strong>${age}</strong>, gender <strong>${gender}</strong>, and your preferred <strong>${anesthesia}</strong> anesthesia, we have tailored the following surgical simulation for you:</p>`;
   
       switch (condition) {
         case 'appendicitis':
@@ -60,43 +60,73 @@ document.addEventListener('DOMContentLoaded', function () {
       }
   
       // Create a new bar chart to represent the surgical simulation phases
-      surgeryChart = new Chart(chartCanvas, {
-        type: 'bar',
-        data: {
-          labels: ['Pre-Operative', 'Intra-Operative', 'Post-Operative'],
-          datasets: [{
-            label: 'Surgery Phase Analysis',
-            data: chartData,
-            backgroundColor: [
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(153, 102, 255, 0.2)'
-            ],
-            borderColor: [
-              'rgba(75, 192, 192, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
+  
+surgeryChart = new Chart(chartCanvas, {
+  type: 'bar',
+  data: {
+      labels: ['Pre-Operative', 'Intra-Operative', 'Post-Operative'],
+      datasets: [{
+          label: 'Surgery Phase Analysis',
+          data: chartData,
+          backgroundColor: [
+              'rgba(52, 152, 219, 0.6)',
+              'rgba(231, 76, 60, 0.6)',
+              'rgba(46, 204, 113, 0.6)'
+          ],
+          borderColor: [
+              'rgba(52, 152, 219, 1)',
+              'rgba(231, 76, 60, 1)',
+              'rgba(46, 204, 113, 1)'
+          ],
+          borderWidth: 2,
+          borderRadius: 6
+      }]
+  },
+  options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+          y: {
               beginAtZero: true,
               title: {
-                display: true,
-                text: 'Intensity / Impact (%)'
+                  display: true,
+                  text: 'Intensity / Impact (%)',
+                  font: {
+                      size: 14,
+                      weight: 'bold'
+                  }
+              },
+              grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
               }
-            }
           },
-          plugins: {
-            legend: {
-              display: false
-            }
+          x: {
+              grid: {
+                  display: false
+              }
           }
-        }
-      });
+      },
+      plugins: {
+          legend: {
+              display: false
+          },
+          tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              padding: 12,
+              titleFont: {
+                  size: 14
+              },
+              bodyFont: {
+                  size: 13
+              }
+          }
+      },
+      animation: {
+          duration: 1500,
+          easing: 'easeInOutQuart'
+      }
+  }
+});
   
       // In a full implementation, you might also fetch and analyze the Korean Surgery Dataset
       // For example:
